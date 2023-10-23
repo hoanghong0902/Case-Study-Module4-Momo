@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+            rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{css/style.css}"
+            rel="stylesheet"
+    />
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img th:src="@{image/momoIcon.png}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+                Momo
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Vé xem phim</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Nạp tiền điện thoại</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                             Chuyển tiền
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dataDropdown">
+                            <li><button class="dropdown-item" onclick="viewTransferMoneyToMomoForm()">Chuyển tiền đến ví Momo</button></li>
+                            <li><button class="dropdown-item" onclick="viewTransferMoneyToBankForm()">Chuyển tiền đến Ngân hàng</button></li>
+                            <li><button class="dropdown-item" onclick="viewRechargeForm()">Nạp tiền vào Momo</button></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="billDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thanh Toán Hóa Đơn
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><button class="dropdown-item" onclick="">Thanh toán hóa đơn điện</button></li>
+                            <li><a class="dropdown-item" href="#">Thanh toán hóa đơn nước</a></li>
+                            <li><a class="dropdown-item" href="#">Thanh toán hóa đơn Internet</a></li>
+                            <li><a class="dropdown-item" href="#">Thanh toán Ví trả sau</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-danger btn-rounded" type="submit">Search</button>
+                </form>
+
+                <ul class="navbar-nav">
+                    <!-- Avatar -->
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle d-flex align-items-center"
+                                href="#"
+                                id="navbarDropdownMenuLink"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                        >
+                            <img
+                                    src="https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den-599x600.png"
+                                    class="rounded-circle"
+                                    height="30"
+                                    alt="Portrait of a Woman"
+                                    loading="lazy"
+                            />
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li>
+                                <button class="dropdown-item" onclick="profile()">Xem thông tin</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" onclick="viewEditForm()">Chỉnh sửa</button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" onclick="logout()" >Đăng xuất</button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+
+
+<!-- Carousel wrapper -->
+<div id="carouselDarkVariant" class="carousel slide carousel-fade carousel-dark" data-mdb-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+        <button
+                data-mdb-target="#carouselDarkVariant"
+                data-mdb-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+        ></button>
+        <button
+                data-mdb-target="#carouselDarkVariant"
+                data-mdb-slide-to="1"
+                aria-label="Slide 1"
+        ></button>
+        <button
+                data-mdb-target="#carouselDarkVariant"
+                data-mdb-slide-to="2"
+                aria-label="Slide 1"
+        ></button>
+    </div>
+
+    <!-- Inner -->
+    <div class="carousel-inner">
+        <!-- Single item -->
+        <div class="carousel-item active">
+            <img th:src="@{image/momoqc1.png}" class="d-block w-100" alt="Motorbike Smoke"/>
+
+        </div>
+
+        <!-- Single item -->
+        <div class="carousel-item">
+            <img th:src="@{image/momoqc2.png}" class="d-block w-100" alt="Mountaintop"/>
+
+        </div>
+
+        <!-- Single item -->
+        <div class="carousel-item">
+            <img th:src="@{image/momoqc3.png}" class="d-block w-100" alt="Woman Reading a Book"/>
+
+        </div>
+    </div>
+    <!-- Inner -->
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselDarkVariant" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!-- Carousel wrapper -->
+
+
+<div class="content" id="content">
+
+    <img th:src="@{image/momo1.png}" class="rounded mx-auto d-block" width="100%" alt="...">
+    <img th:src="@{image/momo2.png}" class="rounded mx-auto d-block" width="100%" alt="...">
+    <img th:src="@{image/momo3.png}" class="rounded mx-auto d-block" width="100%" alt="...">
+
+</div>
+
+
+<div id="userInfo"></div>
+
+<div id="form"></div>
+
+<footer th:replace="/layout :: footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"
+></script>
+
+<script>
+    const token = localStorage.getItem("token");
+
+    function logout(){
+        localStorage.removeItem("token");
+        window.location.href="login";
+    }
+
+    function edit() {
+
+        this.event.preventDefault();
+        let data=JSON.stringify({
+            id:$('#id').val(),
+            username:$('#username').val(),
+            password:$('#password').val(),
+            fullName:$('#fullName').val(),
+            phoneNumber:$('#phoneNumber').val(),
+            bankAccountNumber:$('#bankAccountNumber').val(),
+            age:$('#age').val(),
+            money:0
+        })
+        console.log(data);
+        $.ajax({
+            url: "/api/edit",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "PUT",
+            data: data,
+            contentType: 'application/json',
+            success: (response) => {
+                console.log(response);
+                alert("Chỉnh sửa thông tin thành công");
+            },
+            error: (e) => {
+                console.log(e);
+                alert("Chỉnh sửa thông tin thất bại");
+            }
+
+        });
+    }
+
+    function recharge(){
+        this.event.preventDefault();
+        let data=JSON.stringify({
+            money:$('#money').val()
+        })
+        $.ajax({
+            url: "/api/recharge",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "POST",
+            contentType: 'application/json',
+            data: data,
+            success: (response) => {
+                console.log(response);
+                alert("Nạp tiền thành công");
+            },
+            error: (e) => {
+                console.log(e);
+                alert("Nạp tiền thất bại: " + e.responseText);
+            }
+
+        });
+    }
+    function viewRechargeForm(){
+        $("#carouselDarkVariant").hide();
+        $("#content").hide();
+        $("#userInfo").hide();
+        $("#form").show();
+        let temp = '<div class="container" id ="recharge">\n' +
+            '        <form >\n' +
+            '            <div class="row mb-3"><h1 class="text-center">Nạp tiền vào ví Momo</h1>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Nhập số tiền cần nạp</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="number" id="money" name="money" class="form-control" />\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            \n' +
+            '            <div class="button-submit text-center mt-3">\n' +
+            '                <button type="submit" style="background-color: #eba7da;" class="btn btn-rounded mt-3 " onclick="recharge()">Nạp tiền</button>\n' +
+            '            </div>\n' +
+            '        </form>\n' +
+            '    </div>';
+        $("#form").html(temp);
+    }
+    function renderFormEdit(user) {
+
+        let temp = '<div class="container" id ="profile">\n' +
+            '        <form action="">\n' +
+            '                    <input type="hidden" id="id" name="id" value="' + user.id + '" />\n' +
+            '            <div class="row mb-3"><h1 class="text-center">Chỉnh sửa thông tin</h1>\n' +
+            '            </div>\n' +
+            '            <div class="row">\n' +
+            '                <div class="col-sm-3">\n' +
+            '                <p class="mb-0">Tên</p>\n' +
+            '                </div>\n' +
+            '                <div class="col-sm-9">\n' +
+            '                    <input type="text" id="fullName" name="fullName" class="form-control" value="' + user.fullName + '" />\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Username</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="text" id="username" name="username" class="form-control" value="' + user.username + '"/>\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            <div class="row">\n' +
+            '                <div class="col-sm-3">\n' +
+            '                <p class="mb-0">Mật khẩu</p>\n' +
+            '                </div>\n' +
+            '                <div class="col-sm-9">\n' +
+            '                    <input type="password" id="password" name="password" class="form-control" value=""/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Số điện thoại</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" value="' + user.phoneNumber + '"/>\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            <div class="row">\n' +
+            '                <div class="col-sm-3">\n' +
+            '                <p class="mb-0">Tài khoản ngân hàng</p>\n' +
+            '                </div>\n' +
+            '                <div class="col-sm-9">\n' +
+            '                    <input type="text" id="bankAccountNumber" name="bankAccountNumber" class="form-control" value="' + user.bankAccountNumber + '"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Tuổi</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="number" id="age" name="age" class="form-control" value=" ' + user.age + ' "/>\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            <div class="button-submit text-center mt-3">\n' +
+            '                <button type="submit" style="background-color: #eba7da;" class="btn btn-rounded mt-3 " onclick="edit()" >Chỉnh sửa</button>\n' +
+            '            </div>\n' +
+            '        </form>\n' +
+            '    </div>'
+        $("#form").html(temp);
+    }
+
+    function transferMoneyToMomo(){
+        this.event.preventDefault();
+        let data=JSON.stringify({
+            phoneNumber:$('#phoneNumber').val(),
+            money:$('#money').val(),
+        })
+        $.ajax({
+            url: "/api/transferMoneyToMomo",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "POST",
+            contentType: 'application/json',
+            data: data,
+            success: (response) => {
+                console.log(response);
+                alert("Chuyển tiền thành công");
+            },
+            error: (e) => {
+                console.log(e);
+                alert("Chuyển tiền thất bại: " + e.responseText);
+            }
+
+        });
+    }
+
+    function viewTransferMoneyToMomoForm(){
+        $("#carouselDarkVariant").hide();
+        $("#content").hide();
+        $("#userInfo").hide();
+        $("#form").show();
+        let temp = '<div class="container" id ="transferMoneyToMomo">\n' +
+            '        <form >\n' +
+            '            <div class="row mb-3"><h1 class="text-center">Chuyển tiền đến ví Momo</h1>\n' +
+            '            </div>\n' +
+            '            <div class="row">\n' +
+            '                <div class="col-sm-3">\n' +
+            '                <p class="mb-0">Nhập số điện thoại</p>\n' +
+            '                </div>\n' +
+            '                <div class="col-sm-9">\n' +
+            '                    <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" />\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Nhập số tiền cần chuyển</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="number" id="money" name="money" class="form-control" />\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            \n' +
+            '            <div class="button-submit text-center mt-3">\n' +
+            '                <button type="submit" style="background-color: #eba7da;" class="btn btn-rounded mt-3 " onclick="transferMoneyToMomo()">Submit</button>\n' +
+            '            </div>\n' +
+            '        </form>\n' +
+            '    </div>';
+        $("#form").html(temp);
+    }
+
+    function transferMoneyToBank(){
+        this.event.preventDefault();
+        let data=JSON.stringify({
+            bankAccountNumber:$('#bankAccountNumber').val(),
+            money:$('#money').val(),
+        })
+        $.ajax({
+            url: "/api/transferMoneyToBank",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "POST",
+            contentType: 'application/json',
+            data: data,
+            success: (response) => {
+                console.log(response);
+                alert("Chuyển tiền thành công");
+            },
+            error: (e) => {
+                console.log(e);
+                alert("Chuyển tiền thất bại: " + e.responseText);
+            }
+
+        });
+    }
+
+    function viewTransferMoneyToBankForm(){
+        $("#carouselDarkVariant").hide();
+        $("#content").hide();
+        $("#userInfo").hide();
+        $("#form").show();
+        let temp = '<div class="container" id ="transferMoneyToBank">\n' +
+            '        <form >\n' +
+            '            <div class="row mb-3"><h1 class="text-center">Chuyển tiền đến Ngân hàng</h1>\n' +
+            '            </div>\n' +
+            '            <div class="row">\n' +
+            '                <div class="col-sm-3">\n' +
+            '                <p class="mb-0">Nhập số tài khoản ngân hàng</p>\n' +
+            '                </div>\n' +
+            '                <div class="col-sm-9">\n' +
+            '                    <input type="text" id="bankAccountNumber" name="bankAccountNumber" class="form-control" />\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <hr>\n' +
+            '            <div class="row">\n' +
+            '              <div class="col-sm-3">\n' +
+            '              <p class="mb-0">Nhập số tiền cần chuyển</p>\n' +
+            '              </div>\n' +
+            '              <div class="col-sm-9">\n' +
+            '                  <input type="number" id="money" name="money" class="form-control" />\n' +
+            '              </div>\n' +
+            '          </div>\n' +
+            '          <hr>\n' +
+            '            \n' +
+            '            <div class="button-submit text-center mt-3">\n' +
+            '                <button type="submit" style="background-color: #eba7da;" class="btn btn-rounded mt-3 " onclick="transferMoneyToBank()">Submit</button>\n' +
+            '            </div>\n' +
+            '        </form>\n' +
+            '    </div>';
+        $("#form").html(temp);
+    }
+
+    function viewEditForm() {
+        $("#carouselDarkVariant").hide();
+        $("#content").hide();
+        $("#userInfo").hide();
+        $("#form").show();
+        $.ajax({
+            url: "/api/profile",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "GET",
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                renderFormEdit(response);
+            },
+            error: (e) => {
+                console.log(e);
+            }
+
+        });
+    }
+
+    function renderUserInfo(data) {
+        let temp = '<div class="container mt-5" id ="profile">\n' +
+            '    <div class="row mb-3"><h1 class="text-center">Thông tin User</h1>\n' +
+            '    </div>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Họ và tên</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0" >' + data.fullName + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <hr>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Username</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0"> ' + data.username + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <hr>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Số điện thoại</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0"> ' + data.phoneNumber + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <hr>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Tài khoản ngân hàng</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0"> ' + data.bankAccountNumber + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <hr>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Tuổi</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0"> ' + data.age + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '    <hr>\n' +
+            '    <div class="row">\n' +
+            '        <div class="col-sm-3">\n' +
+            '            <p class="mb-0">Số dư</p>\n' +
+            '        </div>\n' +
+            '        <div class="col-sm-9">\n' +
+            '            <p class="text-muted mb-0"> ' + data.money + ' </p>\n' +
+            '        </div>\n' +
+            '    </div>\n' +
+            '</div>';
+        $("#userInfo").html(temp);
+    }
+
+    function profile() {
+        // $("header").hide();
+        $("#carouselDarkVariant").hide();
+        $("#content").hide();
+        $("#form").hide();
+        $("#userInfo").show();
+        $.ajax({
+            url: "/api/profile",
+            headers :{
+                'Authorization': 'Bearer ' + token
+            },
+            type: "GET",
+            dataType: "json",
+            success: (response) => {
+                console.log(response);
+                renderUserInfo(response);
+            },
+            error: (e) => {
+                console.log(e);
+            }
+
+        });
+    }
+
+
+</script>
+</body>
+</html>

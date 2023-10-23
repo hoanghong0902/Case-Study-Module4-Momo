@@ -1,0 +1,62 @@
+.navbar {
+    background-color: #fad9f3;
+}
+
+body{
+    background-color: #f5e9f2;
+}
+
+.content{
+    margin-top: 60px;
+}
+
+#carouselDarkVariant{
+    margin-top: 60px;
+}
+
+footer{
+    margin-top: 20px;
+}
+
+#userInfo{
+    margin-top: 70px;
+}
+
+#edit{
+    margin-top: 70px;
+    width: 50%;
+    padding: 30px;
+    background-color: rgb(247, 218, 223);
+}
+
+#transferMoneyToMomo{
+    margin-top: 150px;
+    width: 50%;
+    padding: 30px;
+    background-color: rgb(247, 218, 223);
+}
+
+#transferMoneyToBank{
+    margin-top: 150px;
+    width: 50%;
+    padding: 30px;
+    background-color: rgb(247, 218, 223);
+}
+
+#recharge{
+    margin-top: 150px;
+    width: 50%;
+    padding: 30px;
+    background-color: rgb(247, 218, 223);
+}
+#profile{
+    margin-top: 70px;
+    width: 50%;
+    padding: 30px;
+    background-color: rgb(247, 218, 223);
+}
+
+input{
+    background-color: rgb(253, 196, 255);
+}
+
